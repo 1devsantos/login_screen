@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:login_screen/core/routes/app_routes.dart';
 import 'package:login_screen/core/themes/app_theme.dart';
 import 'package:login_screen/views/home/home_view.dart';
 import 'package:login_screen/views/sign_in/sign_in_view.dart';
 import 'package:login_screen/views/sign_up/sign_up_view.dart';
+import 'package:login_screen/views/widgets/check_auth.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -13,11 +15,11 @@ class AppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Login Screen',
       theme: AppTheme.mainTheme,
-      home: const SignInView(),
+      home: const CheckAuth(),
       routes: {
-        '/signIn': (context) => const SignInView(),
-        '/signUp': (context) => const SignUpView(),
-        '/home': (context) => const HomeView(),
+        AppRoutes.signIn: (context) => const SignInView(),
+        AppRoutes.signUp: (context) => const SignUpView(),
+        AppRoutes.home: (context) => const HomeView(),
       },
     );
   }
