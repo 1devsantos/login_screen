@@ -22,6 +22,8 @@ class TextFormFieldWidget extends StatefulWidget {
 }
 
 class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
+  bool obscureText = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,16 +45,30 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
               ),
             ),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(
-                  color: AppColors.primary,
-                  width: 1,
-                ),
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(
+                color: AppColors.primary,
+                width: 1,
+              ),
             ),
             isDense: true,
             hintText: widget.hintText,
             hintStyle: Theme.of(context).textTheme.bodySmall,
+            suffixIcon: widget.securityField
+                ? IconButton(
+                    onPressed: () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    },
+                    icon: Icon(
+                      obscureText ? Icons.visibility : Icons.visibility_off,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  )
+                : null,
           ),
+          obscureText: widget.securityField == obscureText ? false : true,
           validator: widget.validator,
         )
       ],
